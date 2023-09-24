@@ -1,0 +1,47 @@
+import Foundation
+let nom:String = "Balmore Chavez"
+let obj = superheroe(nom)
+print("Ingrese la descripcion de superheroe",nom)
+var desc:String = readLine()!
+obj.decripcion_set(desc)
+print("el superheroe \(nom) posee capa? true/false ")
+var poseeCapa = Bool(readLine()!)!
+obj.capa_set(poseeCapa)
+obj.aMostrar()
+
+public class superheroe{
+  var nombre:String
+  var descripcion:String
+  var capa:Bool
+  
+  init(_ nombre:String){
+    self.nombre = nombre
+    self.descripcion = ""
+    self.capa = false
+  }
+  
+  func decripcion_get()->String{
+    return descripcion
+  }
+  func decripcion_set(_ descripcion:String){
+    self.descripcion = descripcion
+  }
+
+  func capa_get()->Bool{
+    return capa
+  }
+  func capa_set(_ capa:Bool){
+    self.capa = capa
+  }
+  
+
+    func aMostrar(){
+      print("El nombre es: ",nombre)
+      print("La descripcion es: ",decripcion_get())
+      if(capa_get()){
+        print("el heroe posee capa")
+      }else{
+        print("El heroe no posee capa")
+      }
+    }
+}
