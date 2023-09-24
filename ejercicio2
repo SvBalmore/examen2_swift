@@ -1,0 +1,60 @@
+import Foundation
+OperacionesBanco.realizarOperaciones()
+
+public class ParcialII{
+  var saldoDeCuenta:Double
+  var nombreDelTitular:String
+  var numeroDeCuenta:Int
+  init(_ nomb:String,_ saldo:Double){
+    self.saldoDeCuenta = saldo
+    self.nombreDelTitular = nomb 
+    numeroDeCuenta = Int.random(in:1000..<9999)
+  }
+  func setIngreso(_ ingreso:Double){
+    self.saldoDeCuenta = saldoDeCuenta + ingreso
+  }
+  func setReingreso(_ reingreso:Double){
+    self.saldoDeCuenta = saldoDeCuenta - reingreso
+  }
+  func getSaldoCuenta()->Double{
+    return saldoDeCuenta
+  }
+  func getDatosCuenta()->String{
+    var mensaje:String
+    mensaje = "El nombre del titular es:\(nombreDelTitular), el numero de cuenta es: \(numeroDeCuenta), el saldo actual es: \(getSaldoCuenta())"
+    return mensaje
+  }
+
+  func realizarTransferenciaEntreCuentas(_ nueva: ParcialII,_ monto: Double) {
+        if monto <= saldoDeCuenta {
+            saldoDeCuenta = saldoDeCuenta - monto
+            nueva.setIngreso(monto)
+            print("Transferencia exitosa.")
+        } else {
+            print("Saldo insuficiente para realizar la transferencia.")
+        }
+    }
+  
+}
+class OperacionesBanco {
+    static func realizarOperaciones() {
+        let Parcial_1 = ParcialII("Balmore Chavez", 1000.0)
+        let Parcial_2 = ParcialII("Rafael Portillo", 1500.0)
+        
+        print("Cuenta 1:")
+        print(Parcial_1.getDatosCuenta())
+        print("\nCuenta 2:")
+        print(Parcial_2.getDatosCuenta())
+        
+        
+        print("\nRealizando transferencia de Cuenta 1 a Cuenta 2...")
+        print("Ingrese el monto a transferir")
+        let m:Double = Double(readLine()!)!
+        Parcial_1.realizarTransferenciaEntreCuentas(Parcial_2, m)
+        
+        print("\nCuenta 1 después de la transferencia:")
+        print(Parcial_1.getDatosCuenta())
+        print("\nCuenta 2 después de la transferencia:")
+        print(Parcial_2.getDatosCuenta())
+    }
+}
